@@ -8,8 +8,22 @@ Devise.setup do |config|
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '870da564ee1e7bf214fef38752b8e104784f9c0e0bb3e45debe1402677653f64ca8440218ea10ce66ac9aa0c6f108d65ad9c50301e98afd13cc8a7eba19e8728'
 
-  # in Devise Initializer
+  # STUFF FOR DEVISE
   config.allow_unconfirmed_access_for = 365.days
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.smtp_settings = {
+    address:        'smtp.sendgrid.net',
+    port:           '2525',
+    authentication: :plain,
+    user_name:      ENV['SENDGRID_USERNAME'],
+    password:       ENV['SENDGRID_PASSWORD'],
+    domain:         'heroku.com',
+    enable_starttls_auto: true
+  }
+
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
