@@ -1,0 +1,78 @@
+<div class="jumbotron">
+  <div class="container-fluid">
+    <div class="row" style="margin-top: 20px">
+      <div class="col-xs-3 col-sm-2 col-lg-2 col-xs-push-1 vcenter">
+        <%= image_tag 'checkmark.png', class: "img-responsive", alt: "checkmark" %>
+      </div> <!-- image div -->
+      <div class="col-xs-8 col-xs-push-1 col-sm-8 col-sm-push-2 col-lg-9 vcenter">
+        <h1>Blocitoff</h1>
+        <h3>Either get it done or get it off the list!</h3>
+      </div> <!-- jumbotron text -->
+    </div> <!-- row -->
+  </div> <!-- fluid container -->
+</div> <!-- jumbotron -->
+
+<script>
+$( document ).ready(function() {
+    var heights = $(".row-1").map(function() {
+        return $(this).height();
+    }).get(),
+    maxHeight = Math.max.apply(null, heights);
+    $(".row-1").height(maxHeight);
+    window.onresize = function(){ location.reload(); }
+});
+
+$( document ).ready(function() {
+    var heights = $(".row-2").map(function() {
+        return $(this).height();
+    }).get(),
+    maxHeight = Math.max.apply(null, heights);
+    $(".row-2").height(maxHeight);
+    window.onresize = function(){ location.reload(); }
+});
+</script>
+
+<div class="container">
+  <div class="col-sm-6 container">
+    <div class="md-well row-1">
+      <h4 class="text-center">Today's Tasks</h4>
+        <p>☐ Test to Do</p>
+        <p>✓ Test Done</p>
+    </div> <!-- well -->
+  </div> <!-- container -->
+
+  <div class="col-sm-6 container">
+    <div class="md-well row-1">
+      <h4 class="text-center">About to Expire</h4>
+    </div> <!-- well -->
+  </div> <!-- container -->
+
+  <div class="col-sm-4 container">
+    <div class="md-well row-2">
+      <h4 class="text-center">My Lists</h4>
+    </div> <!-- well -->
+  </div> <!-- container -->
+
+  <div class="col-sm-4 container">
+    <div class="md-well row-2">
+      <h4 class="text-center">Shared Lists</h4>
+    </div> <!-- well -->
+  </div> <!-- container -->
+
+  <div class="col-sm-4 container">
+    <div class="md-well row-2">
+      <h4 class="text-center">Delegated Tasks</h4>
+        <h5 style="margin-left: -15px">Me To Others</h5>
+          <p>☐ Test to Do</p>
+        <h5 style="margin-left: -15px">Others To Me</h5>
+          <p>✓ Test Done</p>
+    </div> <!-- well -->
+  </div> <!-- container -->
+
+  <div class="col-xs-12 container">
+    <div class="md-well">
+      <h4 class="text-center">Expired Tasks</h4>
+    </div> <!-- well -->
+  </div> <!-- container -->
+
+</div> <!-- container -->
