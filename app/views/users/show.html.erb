@@ -4,37 +4,26 @@
 
 <div class="container">
   <div class="row">
-    <h1 class="text-center"><%= @user.first_name %>'s Profile</h1>
+    <h1 class="text-center">
+      <% if @user.first_name == nil || @user.first_name == "" %>
+        My Profile
+      <% else %>
+        <%= @user.first_name %>'s Profile
+      <% end %>
+    </h1>
+    <h4 class="text-center"><%= link_to('- Click Here to Logout -', destroy_user_session_path, :method => :delete) %></h4>
   </div> <!-- row -->
 
   <div class="container">
-    <div class="md-well well-link">
-      <h2>My Lists</h2>
-
-    </div> <!-- well -->
-  </div> <!-- container -->
-
-  <div class="container">
-    <div class="md-well well-link">
-      <h2>Shared Lists</h2>
-    </div> <!-- well -->
-  </div> <!-- container -->
-
-  <div class="container">
-    <div class="md-well well-link">
-      <h2>My Delegated Tasks</h2>
-    </div> <!-- well -->
-  </div> <!-- container -->
-
-  <div class="container">
-    <div class="md-well well-link">
-      <h2>Tasks Delegated to Me</h2>
-    </div> <!-- well -->
-  </div> <!-- container -->
-
-  <div class="container">
-    <div class="md-well well-link">
-      <h2>My Expired Tasks</h2>
+    <div class="md-well">
+      <h2>My Usage Stats</h2>
+      <h4 style="line-height: 1.4"><ul>
+        <li>0 Personal Lists</li>
+        <li>0 Shared Lists</li>
+        <li>0 Tasks Delegated to Others</li>
+        <li>0 Tasks Delegated to Me</li>
+        <li>0 Expired Tasks</li>
+      </ul></h4>
     </div> <!-- well -->
   </div> <!-- container -->
 
@@ -44,7 +33,7 @@
     <h2>My Information</h2>
       <p class="indent"><strong>Name: </strong><%= @user.first_name %> <%= @user.last_name %></p>
       <p class="indent"><strong>Email: </strong><%= @user.email %></p>
-      <p class="indent"><%= link_to "Edit My Information", user_path %></p>
+      <p class="indent"><%= link_to "Edit My Information", edit_user_registration_path %></p>
   </div> <!-- well -->
 </div> <!-- container -->
 
