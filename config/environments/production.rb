@@ -15,7 +15,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   # STUFF FOR DEVISE
-  config.action_mailer.default_url_options[host:] = 'blooming-wave-71204.herokuapp.com/' }
+  config.action_mailer.default_url_options = { host: 'blooming-wave-71204.herokuapp.com/' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
