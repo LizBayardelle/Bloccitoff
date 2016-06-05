@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row" style="height: 70px"></div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <h1 class="text-center"><%= @user.first_name %>'s Profile</h1>
+  </div> <!-- row -->
+
+  <div class="container">
+    <div class="md-well well-link">
+      <h2>My Lists</h2>
+
+    </div> <!-- well -->
+  </div> <!-- container -->
+
+  <div class="container">
+    <div class="md-well well-link">
+      <h2>Shared Lists</h2>
+    </div> <!-- well -->
+  </div> <!-- container -->
+
+  <div class="container">
+    <div class="md-well well-link">
+      <h2>My Delegated Tasks</h2>
+    </div> <!-- well -->
+  </div> <!-- container -->
+
+  <div class="container">
+    <div class="md-well well-link">
+      <h2>Tasks Delegated to Me</h2>
+    </div> <!-- well -->
+  </div> <!-- container -->
+
+  <div class="container">
+    <div class="md-well well-link">
+      <h2>My Expired Tasks</h2>
+    </div> <!-- well -->
+  </div> <!-- container -->
+
+
+<div class="container">
+  <div class="md-well">
+    <h2>My Information</h2>
+      <p class="indent"><strong>Name: </strong><%= @user.first_name %> <%= @user.last_name %></p>
+      <p class="indent"><strong>Email: </strong><%= @user.email %></p>
+      <p class="indent"><%= link_to "Edit My Information", user_path %></p>
+  </div> <!-- well -->
+</div> <!-- container -->
+
+<div class="container text-center">
+  <%= link_to('Logout', destroy_user_session_path, class: "btn btn-primary", :method => :delete) %>
+</div> <!-- container -->
+
+</div> <!-- container -->
