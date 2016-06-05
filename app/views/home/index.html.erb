@@ -33,9 +33,12 @@ $( document ).ready(function() {
 </script>
 
 <div class="container">
+
+<% if user_signed_in? %>
+
   <div class="col-sm-6 container">
     <div class="md-well row-1">
-      <h4 class="text-center">Today's Tasks</h4>
+      <h4 class="text-center green-underline">Today's Tasks</h4>
         <p>☐ Test to Do</p>
         <p>✓ Test Done</p>
     </div> <!-- well -->
@@ -43,25 +46,25 @@ $( document ).ready(function() {
 
   <div class="col-sm-6 container">
     <div class="md-well row-1">
-      <h4 class="text-center">About to Expire</h4>
+      <h4 class="text-center green-underline">About to Expire</h4>
     </div> <!-- well -->
   </div> <!-- container -->
 
   <div class="col-sm-4 container">
     <div class="md-well row-2">
-      <h4 class="text-center">My Lists</h4>
+      <h4 class="text-center green-underline">My Lists</h4>
     </div> <!-- well -->
   </div> <!-- container -->
 
   <div class="col-sm-4 container">
     <div class="md-well row-2">
-      <h4 class="text-center">Shared Lists</h4>
+      <h4 class="text-center green-underline">Shared Lists</h4>
     </div> <!-- well -->
   </div> <!-- container -->
 
   <div class="col-sm-4 container">
     <div class="md-well row-2">
-      <h4 class="text-center">Delegated Tasks</h4>
+      <h4 class="text-center green-underline">Delegated Tasks</h4>
         <h5 style="margin-left: -15px">Me To Others</h5>
           <p>☐ Test to Do</p>
         <h5 style="margin-left: -15px">Others To Me</h5>
@@ -71,8 +74,28 @@ $( document ).ready(function() {
 
   <div class="col-xs-12 container">
     <div class="md-well">
-      <h4 class="text-center">Expired Tasks</h4>
+      <h4 class="text-center green-underline">Expired Tasks</h4>
     </div> <!-- well -->
   </div> <!-- container -->
 
+<% else %>
+
+  <div class="md-well" id="index-sell">
+    <h2>You need more than just a to do list.</h2>
+      <h3>Wouldn't you like to...</h3>
+      <div class="row">
+        <div class="col-lg-6">
+          <p>...create categotized to do lists?</p>
+          <p>...purge those pesky items you'll never do anyway?</p>
+          <p>...share entire lists with coworkers or family?</p>
+        </div><!-- text two columns -->
+        <div class="col-lg-6">
+          <p>...delegate tasks to your spouse or kids?</p>
+          <p>...be able to monitor the status of delegated tasks?</p>
+        </div> <!-- text two columns -->
+      </div> <!-- row -->
+    <h2><%= link_to 'Create an account', new_user_registration_path %> and start listing today!</h2>
+  </div> <!-- well -->
+
+<% end %>
 </div> <!-- container -->

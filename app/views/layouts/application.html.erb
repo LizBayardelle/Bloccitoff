@@ -20,21 +20,26 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="./" class="navbar-brand">Blocitoff</a>
+      <a href="/" class="navbar-brand">Blocitoff</a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav">
-				<li class="dropdown">
-	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Lists<b class="caret"></b></a>
-	        <ul class="dropdown-menu">
-	          <li><a href="#">Category 1</a></li>
-	          <li><a href="#">Category 2</a></li>
-	          <li><a href="#">Category 3</a></li>
-	        </ul>
-	      </li>
-        <li><a href="#">Shared Lists</a></li>
-        <li><a href="#">Task Delegation</a></li>
-        <li><a href="#">My Account</a></li>
+        <% if user_signed_in? %>
+  				<li class="dropdown">
+  	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Lists<b class="caret"></b></a>
+  	        <ul class="dropdown-menu">
+  	          <li><a href="#">Category 1</a></li>
+  	          <li><a href="#">Category 2</a></li>
+  	          <li><a href="#">Category 3</a></li>
+  	        </ul>
+  	      </li>
+          <li><a href="#">Shared Lists</a></li>
+          <li><a href="#">Task Delegation</a></li>
+          <li><%= link_to "My Account", edit_user_registration_path, :class => 'navbar-link'  %></li>
+        <% else %>
+          <li><%= link_to "Sign Up", new_user_registration_path, :class => 'navbar-link'  %></li>
+          <li><%= link_to "Sign In", new_user_session_path, :class => 'navbar-link'  %></li>
+        <% end %>
       </ul>
     </nav>
   </div>
@@ -60,6 +65,7 @@
 
 
 <%= yield %>
+
 
 </body>
 </html>
