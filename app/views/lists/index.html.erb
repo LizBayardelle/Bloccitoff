@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row" style="height: 70px"></div>
+</div>
+
+<div class="col-xs-10 col-xs-push-1 container">
+  <div class="md-well">
+    <h1>My Lists (<%= @lists.count %>)</h1>
+    <% if @lists.count == 0 %>
+      <p>You don't have any lists yet! Why don't we remedy that?<p>
+    <% end %>
+
+    <%= render 'form' %>
+
+    <% @lists.each do %>
+      <%#= link_to list_path(@list) do %>
+        <p><%= @list.name %> (<%= @list.items.count %> Items, <%= link_to "Delete List", list_path(@list), method: :destroy %> )</p>
+      <%# end %>
+    <% end %>
+
+    <div class="text-center">
+      <%= link_to "Back to My Dashboard", home_index_path %>
+    </div> <!-- text-center -->
+
+  </div> <!-- well -->
+</div> <!-- container -->

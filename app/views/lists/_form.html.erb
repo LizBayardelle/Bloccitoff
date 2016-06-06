@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-xs-12">
+    <%= form_for @list do |f| %>
+      <div class="form-group col-sm-6">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control', placeholder: "Enter exercise name" %>
+      </div>
+
+      <div class="form-group col-sm-6">
+        <%= f.label 'Share My List (Not Required)' %>
+        <%= f.text_field :shared_with, class: 'form-control', placeholder: "Enter emails separated by commas" %>
+      </div>
+
+      <div class="text-center"><%= f.submit "Create List", class: 'btn btn-primary' %></div>
+    <% end %>
+  </div>
+</div>
