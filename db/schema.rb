@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160605234031) do
+ActiveRecord::Schema.define(version: 20160608172631) do
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -27,17 +27,18 @@ ActiveRecord::Schema.define(version: 20160605234031) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
 
   create_table "items", force: :cascade do |t|
+    t.integer  "completed",          default: 0
     t.string   "name"
-    t.integer  "days_til_expire"
-    t.string   "delegate_to"
-    t.string   "user_id",         null: false
-    t.string   "list_id",         null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "delegated_to"
+    t.integer  "days_to_expiration"
+    t.integer  "user_id"
+    t.integer  "list_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
-  add_index "items", ["list_id"], name: "index_items_on_list_id", unique: true
-  add_index "items", ["user_id"], name: "index_items_on_user_id", unique: true
+  add_index "items", ["list_id"], name: "index_items_on_list_id"
+  add_index "items", ["user_id"], name: "index_items_on_user_id"
 
   create_table "lists", force: :cascade do |t|
     t.string  "name"

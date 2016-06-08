@@ -18,10 +18,30 @@
     <div class="md-well">
       <h2>My Usage Stats</h2>
       <h4 style="line-height: 1.4"><ul>
-        <li>0 Personal Lists</li>
-        <li>0 Shared Lists</li>
-        <li>0 Tasks Delegated to Others</li>
-        <li>0 Tasks Delegated to Me</li>
+        <% if @lists.count != 1 %>
+          <li><%= @lists.count %> Personal Lists</li>
+        <% else %>
+          <li><%= @lists.count %> Personal List</li>
+        <% end %>
+
+        <% if @shared_lists.count != 1 %>
+          <li><%= @shared_lists.count %> Lists Shared with Me</li>
+        <% else %>
+          <li><%= @shared_lists.count %> List Shared with Me</li>
+        <% end %>
+
+        <% if @items_delegated_by.count != 1 %>
+          <li><%= @items_delegated_by.count %> Tasks Delegated to Someone Else</li>
+        <% else %>
+          <li><%= @items_delegated_by.count %> Task Delegated to Someone Else</li>
+        <% end %>
+
+        <% if @items_delegated_to.count != 1 %>
+          <li><%= @items_delegated_to.count %> Tasks Delegated to Me</li>
+        <% else %>
+          <li><%= @items_delegated_to.count %> Task Delegated to Me</li>
+        <% end %>
+
         <li>0 Expired Tasks</li>
       </ul></h4>
     </div> <!-- well -->

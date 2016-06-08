@@ -109,7 +109,7 @@
 }
 
 .container a:hover {
-  color: #00FF7F !important;
+  color: #000059 !important;
   text-decoration: none !important;
 }
 
@@ -130,6 +130,11 @@
           box-shadow:  0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
   border-radius: 2px !important;
   border: 0 !important;
+  border-top: solid 20px #00FF7F !important;
+}
+
+.md-well-small {
+  border-top: solid thick #00FF7F !important;  
 }
 
 .well-link:hover {
@@ -200,6 +205,9 @@ label {
   padding-top: 15px !important;
 }
 
+.inline-block {
+  display: inline-block !important;
+}
 
 
 

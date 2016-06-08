@@ -37,50 +37,72 @@ $( document ).ready(function() {
 <% if user_signed_in? %>
 
   <div class="col-sm-6 container">
-    <div class="md-well well-link row-1">
-      <h4 class="text-center green-underline">Today's Tasks</h4>
-        <p>☐ Test to Do</p>
-        <p>✓ Test Done</p>
+    <div class="md-well md-well-small well-link row-1">
+      <h4 class="text-center">Newest Tasks</h4>
+        <% @top_items.each do |item| %>
+          <% if item.user_id == current_user.id %>
+          <p>☐ <%= item.name %></p>
+          <% end %>
+        <% end %>
+        <p class="text-center">
+          <% if @my_items.count >= 5 %>
+            <%= link_to lists_path do %>See <%= @my_items.count - 4 %> More...<% end %>
+          <% end %>
+        </p>
     </div> <!-- well -->
   </div> <!-- container -->
 
   <div class="col-sm-6 container">
-    <div class="md-well well-link row-1">
-      <h4 class="text-center green-underline">About to Expire</h4>
+    <div class="md-well md-well-small well-link row-1">
+      <h4 class="text-center">About to Expire</h4>
     </div> <!-- well -->
   </div> <!-- container -->
 
   <div class="col-sm-4 container">
-    <div class="md-well well-link row-2">
-      <h4 class="text-center green-underline">My Lists</h4>
+    <div class="md-well md-well-small well-link row-2">
+      <h4 class="text-center">My Lists</h4>
+      <% @my_lists.each do |list| %>
+          <p><%= link_to list_path(list) do %>
+            <%= list.name %>
+          <% end %></p>
+      <% end %>
+      <p class="text-center"><%= link_to "See All", lists_path %></p>
     </div> <!-- well -->
   </div> <!-- container -->
 
   <div class="col-sm-4 container">
-    <div class="md-well well-link row-2">
-      <h4 class="text-center green-underline">Shared Lists</h4>
+    <div class="md-well md-well-small well-link row-2">
+      <h4 class="text-center">Shared Lists</h4>
     </div> <!-- well -->
   </div> <!-- container -->
 
   <div class="col-sm-4 container">
-    <div class="md-well well-link row-2">
-      <h4 class="text-center green-underline">Delegated Tasks</h4>
+    <div class="md-well md-well-small well-link row-2">
+      <h4 class="text-center">Delegated Tasks</h4>
         <h5 style="margin-left: -15px">Me To Others</h5>
-          <p>☐ Test to Do</p>
+        <% @my_items.each do |item| %>
+            <% if item.delegated_to != "" %>
+              <p>☐ <%= item.name %></p>
+            <% end %>
+        <% end %>
         <h5 style="margin-left: -15px">Others To Me</h5>
-          <p>✓ Test Done</p>
+        <% @items.each do |item| %>
+          <% if item.delegated_to == current_user.email %>
+            <p>☐ <%= item.name %></p>
+          <% end %>
+        <% end %>
     </div> <!-- well -->
   </div> <!-- container -->
 
   <div class="col-xs-12 container">
-    <div class="md-well well-link">
-      <h4 class="text-center green-underline">Expired Tasks</h4>
+    <div class="md-well md-well-small well-link">
+      <h4 class="text-center">Expired Tasks</h4>
     </div> <!-- well -->
   </div> <!-- container -->
 
 <% else %>
 
-  <div class="md-well" id="index-sell">
+  <div class="md-well md-well-small" id="index-sell">
     <h2>You need more than just a to do list.</h2>
       <h3>Wouldn't you like to...</h3>
       <div class="row">

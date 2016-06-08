@@ -1,13 +1,14 @@
 class ListsController < ApplicationController
   def index
-    @lists = List.all
+    @all_lists = List.all
     @list = List.new
-    items = @list.items.all
+    @lists = current_user.lists
   end
 
   def show
     @list = List.friendly.find(params[:id])
     @item = Item.new
+    @items = @list.items.all
   end
 
   def new
@@ -36,9 +37,9 @@ class ListsController < ApplicationController
   def update
     @list = List.friendly.find(params[:id])
 
-    @list.name = params[:weekly][:name]
-    @list.description = params[:weekly][:description]
-    @list.shared_with = params[:weekly][:shared_with]
+    @list.name = params[:list][:name]
+    @list.description = params[:list][:description]
+    @list.shared_with = params[:list][:shared_with]
     @list.user = current_user
 
     if @list.save

@@ -1,15 +1,20 @@
-class ItemssController < ApplicationController
+class ItemsController < ApplicationController
   before_action :authenticate_user!
 
-
   def index
-      @list = List.friendly.find(params[:list_id])
-      @item = Item.new
-      @items = Items.all
+    @list = List.friendly.find(params[:list_id])
+    @item = @list.Item.new
+    @items = @list.Items.all
   end
 
   def new
+    @list = List.friendly.find(params[:list_id])
     @item = Item.new
+  end
+
+  def show
+    @list = List.friendly.find(params[:list_id])
+    item = @list.items.find(params[:id])
   end
 
   def create
@@ -17,7 +22,7 @@ class ItemssController < ApplicationController
     item = @list.items.new(item_params)
     item.user = current_user
 
-    if score.save
+    if item.save
       flash[:notice] = "Item saved successfully."
       redirect_to [@list]
     else
@@ -26,11 +31,31 @@ class ItemssController < ApplicationController
     end
   end
 
+  def update
+    @list = List.friendly.find(params[:list_id])
+    @item = @list.items.find(params[:id])
+
+    @item.name = params[:item][:name]
+    @item.delegated_to = params[:item][:delegated_to]
+    @item.days_til_expire = params[:item][:days_til_expire]
+    @item.completed = params[:item][:completed]
+    @item.user = current_user
+
+    if @item.save
+      @item.completed = Time.now
+      flash[:notice] = "Congratulations!"
+      redirect_to @list
+    else
+      flash.now[:alert] = "Whoops! There was an error checking off item. Please try again."
+      render :edit
+    end
+  end
+
   def destroy
     @list = List.friendly.find(params[:list_id])
-    item = @list.items.find(params[:id])
+    item = Item.find(params[:id])
 
-    if score.destroy
+    if item.destroy
       flash[:notice] = "Item was deleted successfully."
       redirect_to [@list]
     else
@@ -42,6 +67,6 @@ class ItemssController < ApplicationController
   private
 
   def item_params
-      params.require(:item).permit(:name, :delegated_to, :days_til_expire)
+      params.require(:item).permit(:name, :completed, :delegated_to, :days_til_expire)
   end
 end
