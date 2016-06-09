@@ -5,7 +5,9 @@ class ApplicationController < ActionController::Base
   before_action :set_lists
 
   def set_lists
-    @my_lists = current_user.lists
+    if current_user
+      @my_lists = current_user.lists
+    end
   end
 
   def after_sign_in_path_for(resource_or_scope)

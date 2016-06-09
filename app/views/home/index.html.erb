@@ -80,17 +80,20 @@ $( document ).ready(function() {
     <div class="md-well md-well-small well-link row-2">
       <h4 class="text-center">Delegated Tasks</h4>
         <h5 style="margin-left: -15px">Me To Others</h5>
-        <% @my_items.each do |item| %>
-            <% if item.delegated_to != "" %>
-              <p>☐ <%= item.name %></p>
-            <% end %>
-        <% end %>
-        <h5 style="margin-left: -15px">Others To Me</h5>
-        <% @items.each do |item| %>
-          <% if item.delegated_to == current_user.email %>
+          <% @top_items_delegated_by.each do |item| %>
             <p>☐ <%= item.name %></p>
           <% end %>
-        <% end %>
+          <% if @items_delegated_by.count >= 5 %>
+            <%= link_to lists_path do %>See <%= @items_delegated_by.count - 4 %> More...<% end %>
+          <% end %>
+
+        <h5 style="margin-left: -15px">Others To Me</h5>
+          <% @top_items_delegated_to.each do |item| %>
+              <p>☐ <%= item.name %></p>
+          <% end %>
+          <% if @items_delegated_to.count >= 5 %>
+            <%= link_to lists_path do %>See <%= @items_delegated_to.count - 4 %> More...<% end %>
+          <% end %>
     </div> <!-- well -->
   </div> <!-- container -->
 
