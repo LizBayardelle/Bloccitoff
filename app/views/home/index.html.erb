@@ -41,7 +41,12 @@ $( document ).ready(function() {
       <h4 class="text-center">Newest Tasks</h4>
         <% @top_items.each do |item| %>
           <% if item.user_id == current_user.id %>
-          <p>☐ <%= item.name %></p>
+            <p><%= link_to "☐", list_path(item.list_id) %> <%= item.name %>
+            <% if item.delegated_to != "" && item.user_id == current_user.id %>
+              <small>(Delegated to <%= item.delegated_to %>)</small>
+            <% elsif item.delegated_to != "" && item.user_id != current_user.id %>
+              <small>(Delegated by <%= item.user_id %>)</small>
+            <% end %></p>
           <% end %>
         <% end %>
         <p class="text-center">
@@ -64,6 +69,9 @@ $( document ).ready(function() {
       <% @my_lists.each do |list| %>
           <p><%= link_to list_path(list) do %>
             <%= list.name %>
+            <% if list.shared_with != "" %>
+             (Shared)
+            <% end %>
           <% end %></p>
       <% end %>
       <p class="text-center"><%= link_to "See All", lists_path %></p>
@@ -72,7 +80,16 @@ $( document ).ready(function() {
 
   <div class="col-sm-4 container">
     <div class="md-well md-well-small well-link row-2">
-      <h4 class="text-center">Shared Lists</h4>
+      <h4 class="text-center">Others' Lists</h4>
+      <% @shared_lists.each do |list| %>
+        <p><%= link_to list_path(list) do %>
+          <%= list.name %>
+        <% end %></p>
+      <% end %>
+      <% if @shared_lists.count >= 5 %>
+        <%= link_to lists_path do %>See <%= @shared_lists.count - 4 %> More...<% end %>
+      <% end %>
+
     </div> <!-- well -->
   </div> <!-- container -->
 
@@ -81,7 +98,7 @@ $( document ).ready(function() {
       <h4 class="text-center">Delegated Tasks</h4>
         <h5 style="margin-left: -15px">Me To Others</h5>
           <% @top_items_delegated_by.each do |item| %>
-            <p>☐ <%= item.name %></p>
+            <p><%= link_to "☐", list_path(item.list_id) %> <%= item.name %></p>
           <% end %>
           <% if @items_delegated_by.count >= 5 %>
             <%= link_to lists_path do %>See <%= @items_delegated_by.count - 4 %> More...<% end %>
@@ -89,7 +106,7 @@ $( document ).ready(function() {
 
         <h5 style="margin-left: -15px">Others To Me</h5>
           <% @top_items_delegated_to.each do |item| %>
-              <p>☐ <%= item.name %></p>
+              <p><%= link_to "☐", list_path(item.list_id) %>  <%= item.name %></p>
           <% end %>
           <% if @items_delegated_to.count >= 5 %>
             <%= link_to lists_path do %>See <%= @items_delegated_to.count - 4 %> More...<% end %>

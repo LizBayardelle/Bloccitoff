@@ -32,12 +32,15 @@
               <% @my_lists.each do |list|%>
                 <li><%= link_to list_path(list) do %>
                   <%= list.name %>
+                  <% if list.shared_with != "" %>
+                   (Shared)
+                  <% end %>
                 <% end %></li>
               <% end %>
   	        </ul>
   	      </li>
-          <li><a href="#">Shared Lists</a></li>
-          <li><a href="#">Task Delegation</a></li>
+          <li><%= link_to "Shared Lists", sharing_lists_path, :class => 'navbar-link' %></li>
+          <li><%= link_to "Task Delegation", sharing_tasks_path, :class => 'navbar-link' %></li>
           <li><%= link_to "My Account", user_path(current_user), :class => 'navbar-link' %></li>
         <% else %>
           <li><%= link_to "Sign Up", new_user_registration_path, :class => 'navbar-link'  %></li>

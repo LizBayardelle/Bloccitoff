@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row" style="height: 70px"></div>
+</div>
+
+<h1 class="text-center">List Sharing</h1>
+
+<div class="container">
+  <div class="col-sm-6 container">
+    <div class="md-well">
+      <h2 class="text-center">Lists I've Shared</h2>
+      <% @shared_by_me.each do |list| %>
+          <p><%= link_to list_path(list) do %>
+            <%= list.name %>
+          <% end %>
+         (Shared with <%= list.shared_with %>)</p>
+      <% end %>
+
+    </div> <!-- well -->
+  </div> <!-- container -->
+
+  <div class="col-sm-6 container">
+    <div class="md-well">
+      <h2 class="text-center">Shared with Me</h2>
+      <% @shared_with_me.each do |list| %>
+          <p><%= link_to list_path(list) do %>
+            <%= list.name %>
+          <% end %>
+         (Shared by <%= list.user_id %>)</p>
+      <% end %>
+  </div> <!-- well -->
+</div> <!-- container -->

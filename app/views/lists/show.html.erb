@@ -15,14 +15,23 @@
 
     <%= render 'items/form' %>
 
-    <% @items.each do |item|%>
-      <p>
-        <%= item.name %>
-        ( <%= link_to "Delete", list_item_path(@list, item), method: :delete %> )
-      </p>
+    <% @items.each do |item| %>
+        <p><%= link_to "", list_item_path(@list, item), method: :delete, remote: true, class: 'glyphicon glyphicon-ok', style: "margin-right: 10px" %>
+         <%= item.name %>
+        <% if item.delegated_to != "" && item.user_id == current_user.id %>
+          <small>(Delegated to <%= item.delegated_to %>)</small>
+        <% elsif item.delegated_to != "" && item.user_id != current_user.id %>
+          <small>(Delegated by <%= item.user_id %>)</small>
+        <% end %></p>
     <% end %>
 
     <div class="text-center">
+      <% if @list.shared_with != "" && @list.user_id == current_user.id %>
+        <h2 class="text-center"><small>Shared with <%= @list.shared_with %></small></h2>
+      <% elsif @list.shared_with != "" && @list.user_id != current_user.id %>
+        <h2 class="text-center"><small>Shared by <%= @list.user_id %></small></h2>
+      <% end %>
+
       <%= link_to "Back to My Lists", lists_path %>
     </div> <!-- text-center -->
 

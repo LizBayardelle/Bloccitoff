@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
 
   def show
     @list = List.friendly.find(params[:list_id])
-    item = @list.items.find(params[:id])
+    item = Item.find(params[:id])
   end
 
   def create
@@ -53,14 +53,17 @@ class ItemsController < ApplicationController
 
   def destroy
     @list = List.friendly.find(params[:list_id])
-    item = Item.find(params[:id])
+    @item = @list.items.find(params[:id])
 
-    if item.destroy
+    if @item.destroy
       flash[:notice] = "Item was deleted successfully."
-      redirect_to [@list]
     else
       flash[:alert] = "Item couldn't be deleted. Try again."
-      redirect_to [@list]
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 
