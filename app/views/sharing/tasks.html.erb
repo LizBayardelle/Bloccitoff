@@ -8,11 +8,13 @@
   <div class="col-sm-6 container">
     <div class="md-well">
       <h2 class="text-center">Delegated to Me</h2>
-      <% @deligated_to_me.each do |item| %>
-          <p><%= link_to list_path(@list) do %>
+      <% @delegated_to_me.each do |item| %>
+        <p>
+          <%= link_to list_path(item.list) do %>
             <%= item.name %>
           <% end %>
-         (Deligated by <%= item.user_id %>)</p>
+          (Delegated by <%= item.user_id %>)
+        </p>
       <% end %>
     </div> <!-- well -->
   </div> <!-- container -->
@@ -20,11 +22,11 @@
   <div class="col-sm-6 container">
     <div class="md-well">
       <h2 class="text-center">Tasks I Delegated</h2>
-      <% @deligated_by_me.each do |item| %>
-          <p><%= link_to list_path(@list) do %>
+      <% @delegated_by_me.each do |item| %>
+          <p><%= link_to list_path(item.list) do %>
             <%= item.name %>
           <% end %>
-         (Deligated to <%= item.deligated_to %>)</p>
+         (Delegated to <%= item.delegated_to %>)</p>
       <% end %>
     </div> <!-- well -->
   </div> <!-- container -->

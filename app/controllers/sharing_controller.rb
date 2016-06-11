@@ -7,7 +7,6 @@ class SharingController < ApplicationController
 
   def tasks
     @lists = List.all
-    @list = List.friendly.find(params[:list_id])
     @items = Item.all
     @delegated_to_me = @items.where(:delegated_to == current_user.email)
     @delegated_by_me = current_user.items.where.not(delegated_to: "")

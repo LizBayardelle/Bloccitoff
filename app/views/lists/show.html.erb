@@ -16,6 +16,7 @@
     <%= render 'items/form' %>
 
     <% @items.each do |item| %>
+      <%= div_for(item) do %>
         <p><%= link_to "", list_item_path(@list, item), method: :delete, remote: true, class: 'glyphicon glyphicon-ok', style: "margin-right: 10px" %>
          <%= item.name %>
         <% if item.delegated_to != "" && item.user_id == current_user.id %>
@@ -23,6 +24,7 @@
         <% elsif item.delegated_to != "" && item.user_id != current_user.id %>
           <small>(Delegated by <%= item.user_id %>)</small>
         <% end %></p>
+      <% end %>
     <% end %>
 
     <div class="text-center">
