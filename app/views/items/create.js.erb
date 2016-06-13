@@ -1,0 +1,7 @@
+<% if @item.valid? %>
+  $('.js_items').prepend("<p>" + <%= @item.name %> + "</p>");
+  $('.new_item').html("<%= escape_javascript(render partial: 'items/form', locals: { list: @list, item: @new_item }) %>");
+<% else %>
+  $('.flash').prepend("<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><%= flash.now[:alert] %></div>");
+  $('.new_item').html("<%= escape_javascript(render partial: 'items/form', locals: { list: @list, item: @item }) %>");
+<% end %>

@@ -19,15 +19,19 @@ class ItemsController < ApplicationController
 
   def create
     @list = List.friendly.find(params[:list_id])
-    item = @list.items.new(item_params)
-    item.user = current_user
+    @item = @list.items.new(item_params)
+    @item.user = current_user
+    @new_item = Item.new
+    @items = current_user.items
 
-    if item.save
+    if @item.save
       flash[:notice] = "Item saved successfully."
-      redirect_to [@list]
     else
       flash[:alert] = "Item failed to save."
-      redirect_to [@list]
+    end
+
+    respond_to do |format|
+      format.js
     end
   end
 
