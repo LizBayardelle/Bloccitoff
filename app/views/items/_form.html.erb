@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <%= form_for([@list, @item], format: :js, remote: true) do |f| %>
+    <%= form_for([list, item], format: :js, remote: true) do |f| %>
       <div class="form-group col-sm-6">
         <%= f.label :name %>
         <%= f.text_field :name, class: 'form-control', placeholder: "Enter Item Name" %>
