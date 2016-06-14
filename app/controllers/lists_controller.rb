@@ -19,13 +19,16 @@ class ListsController < ApplicationController
   def create
     @list = List.new(list_params)
     @list.user = current_user
+    @new_list = List.new
 
     if @list.save
       flash[:notice] = "Your list was saved successfully."
-      redirect_to @list
     else
       flash.now[:alert] = "Error creating list. Please try again."
-      render :new
+    end
+
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -56,10 +59,13 @@ class ListsController < ApplicationController
 
     if @list.destroy
       flash[:notice] = "\"#{@list.name}\" was deleted successfully."
-      redirect_to action: :index
     else
       flash.now[:alert] = "There was an error deleting the list."
-      render :show
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

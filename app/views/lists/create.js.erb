@@ -1,0 +1,7 @@
+<% if @list.valid? %>
+  $('.js-lists').prepend("<%= escape_javascript(render partial: 'lists/list', locals: { list: @list }) %>");
+  $('.list-form').html("<%= escape_javascript(render partial: 'lists/form', locals: { list: @new_list }) %>");
+<% else %>
+  $('.flash').prepend("<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button><%= flash.now[:alert] %></div>");
+  $('.new-list').html("<%= escape_javascript(render partial: 'lists/form', locals: { list: @list }) %>");
+<% end %>

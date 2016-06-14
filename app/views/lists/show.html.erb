@@ -13,22 +13,12 @@
       <h4 class="text-center">You Have <%= @items.count %> Items To Go!</h4>
     <% end %>
 
-    <div class='new_item'>
-      <%= render 'items/form' %>
+    <div class='item-form'>
+      <%= render partial: 'items/form', locals: { list: @list, item: @item } %>
     </div>
 
     <div class="js_items">
-      <% @items.each do |item| %>
-        <%= div_for(item) do %>
-          <p><%= link_to "", list_item_path(@list, item), method: :delete, remote: true, class: 'glyphicon glyphicon-ok', style: "margin-right: 10px" %>
-           <%= item.name %>
-          <% if item.delegated_to != "" && item.user_id == current_user.id %>
-            <small>(Delegated to <%= item.delegated_to %>)</small>
-          <% elsif item.delegated_to != "" && item.user_id != current_user.id %>
-            <small>(Delegated by <%= item.user_id %>)</small>
-          <% end %></p>
-        <% end %>
-      <% end %>
+      <% render @items %>
     </div>
 
     <div class="text-center">
