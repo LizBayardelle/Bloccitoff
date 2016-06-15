@@ -1,9 +1,12 @@
 <%= div_for(item) do %>
   <p><%= link_to "", list_item_path(@list, item), method: :delete, remote: true, class: 'glyphicon glyphicon-ok', style: "margin-right: 10px" %>
    <%= item.name %>
+   <em> - created <%= distance_of_time_in_words(item.created_at, Time.now) %> ago</em>
+
   <% if item.delegated_to != "" && item.user_id == current_user.id %>
     <small>(Delegated to <%= item.delegated_to %>)</small>
   <% elsif item.delegated_to != "" && item.user_id != current_user.id %>
     <small>(Delegated by <%= item.user_id %>)</small>
   <% end %></p>
+  
 <% end %>
