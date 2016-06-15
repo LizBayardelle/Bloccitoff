@@ -80,7 +80,7 @@ $( document ).ready(function() {
 
   <div class="col-sm-4 container">
     <div class="md-well md-well-small well-link row-2">
-      <h4 class="text-center">Others' Lists</h4>
+      <h4 class="text-center">Shared with Me</h4>
       <% @shared_lists.each do |list| %>
         <p><%= link_to list_path(list) do %>
           <%= list.name %>
