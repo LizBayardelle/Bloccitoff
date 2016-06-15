@@ -26,3 +26,4 @@ gem 'pry-rails'
 gem 'figaro', '1.0'
 gem 'friendly_id', '~> 5.1.0'
 gem 'faker'
+gem 'whenever', :require => false
